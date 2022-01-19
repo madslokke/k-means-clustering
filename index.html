@@ -481,14 +481,14 @@
     ctx.globalAlpha = 0.3;
 
     // Draw grid
-    for (var x = (Math.abs(dataExtremes[0].min) - Math.floor(Math.abs(dataExtremes[0].min))) * (width / dataRange[0]); x < width; x += (width / (dataRange[0] + 2))) {
+    for (var x = (Math.abs(dataExtremes[0].min) - Math.floor(Math.abs(dataExtremes[0].min))) * (width / dataRange[0] + 2); x < width; x += (width / (dataRange[0] + 2))) {
       ctx.moveTo(x, 0);
       ctx.lineTo(x, 400);
       ctx.strokeStyle = "#ddd";
       ctx.stroke();
     }
 
-    for (var y = (Math.abs(dataExtremes[1].min) - Math.floor(Math.abs(dataExtremes[1].min))) * (width / dataRange[1]); y < height; y += (height / (dataRange[1] + 2))) {
+    for (var y = (Math.abs(dataExtremes[1].min) - Math.floor(Math.abs(dataExtremes[1].min))) * (height / dataRange[1] + 2); y < height; y += (height / (dataRange[1] + 2))) {
       ctx.moveTo(0, y);
       ctx.lineTo(400, y);
       ctx.strokeStyle = "#ddd";
@@ -542,7 +542,17 @@
       var x = (point[0] - dataExtremes[0].min + 1) * (width / (dataRange[0] + 2));
       var y = (point[1] - dataExtremes[1].min + 1) * (height / (dataRange[1] + 2));
 
-      ctx.strokeStyle = '#333333';
+      var color = '#333333'
+
+      if (point[2] === 1) {
+        color = '#249361'
+      } else if (point[2] === 2) {
+        color = '#a41d1d'
+      } else if (point[2] === 3) {
+        color = '#cec014'
+      }
+
+      ctx.strokeStyle = color;
       ctx.translate(x, y);
       ctx.beginPath();
       ctx.arc(0, 0, 5, 0, Math.PI * 2, true);
